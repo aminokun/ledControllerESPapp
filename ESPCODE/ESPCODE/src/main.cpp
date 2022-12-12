@@ -6,11 +6,16 @@ const char* password = "89580715389315208415";
 
 WiFiServer server(80);
 
+int buzzerPin = D2;
+int btnOutput1;
+
 void setup() {
   Serial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(D0, OUTPUT);
   pinMode(D1, OUTPUT);
+  pinMode(D5, OUTPUT);
+
   WiFi.begin(ssid, password);
 
   // Wait for connection
@@ -28,27 +33,28 @@ void loop() {
   WiFiClient client = server.available();
   if (client) {
     Serial.println("New client connected");
-    String request = client.readStringUntil('\r');
+    String result = client.readStringUntil('\r');
     client.flush();
-    Serial.println(request);
+    Serial.println(result);
 
-    if (request.indexOf("GET /led/on") >= 0) {
+    if (result.indexOf("GET /led/on") >= 0) {
       digitalWrite(LED_BUILTIN, LOW);
       digitalWrite(D0, HIGH);
       digitalWrite(D1, HIGH);
-      client.println("HTTP/1.1 200 OK");
-      client.println("Content-Type: text/plain");
-      client.println();
-      client.println("LED turned on");
-    } else if (request.indexOf("GET /led/off") >= 0) {
+
+    } else if (result.indexOf("GET /led/off") >= 0) {
       digitalWrite(LED_BUILTIN, HIGH);
       digitalWrite(D0, LOW);
       digitalWrite(D1, LOW);
-      client.println("HTTP/1.1 200 OK");
-      client.println("Content-Type: text/plain");
-      client.println();
-      client.println("LED turned off");
+
+    } else if (result.indexOf("GET /Buzzer/on") >= 0) {
+      digitalWrite(D5, HIGH);
+
+
+    } else if (result.indexOf("GET /Buzzer/off") >= 0){
+      digitalWrite(D5, LOW);
     } else {
+
       client.println("HTTP/1.1 400 Bad Request");
       client.println("Content-Type: text/plain");
       client.println();
