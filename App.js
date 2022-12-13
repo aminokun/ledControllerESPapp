@@ -61,12 +61,19 @@ function App(){
 
 
         <View style={styles.buttonsLed}>
-          <TouchableOpacity style={styles.button} title="Toggle LED on" onPress={toggleLedOn} >
-              <Text style={styles.buttonText}>
+        <TouchableOpacity
+          style={styles.button}
+          title="Toggle LED on"
+          onPress={toggleLedOn} >
+              <Text 
+              style={styles.buttonText}>
                 ON
               </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} title="Toggle LED off" onPress={toggleLedOff} >
+        <TouchableOpacity
+          style={styles.button}
+          title="Toggle LED off"
+          onPress={toggleLedOff} >
               <Text style={styles.buttonText}>
                 OFF
               </Text>
@@ -74,12 +81,18 @@ function App(){
         </View>
       
         <View style={styles.buttonsBuzzer}>
-          <TouchableOpacity style={styles.button} title="Toggle Buzzer on" onPress={toggleBuzzerOn} >
+        <TouchableOpacity
+          style={styles.button}
+          title="Toggle Buzzer on"
+          onPress={toggleBuzzerOn} >
               <Text style={styles.buttonText}>
                 buzzer ON
               </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} title="Toggle Buzzer off" onPress={toggleBuzzerOff} >
+        <TouchableOpacity
+          style={styles.button}
+          title="Toggle Buzzer off"
+          onPress={toggleBuzzerOff} >
               <Text style={styles.buttonText}>
                 buzzer off
               </Text>
