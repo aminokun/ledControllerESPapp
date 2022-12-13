@@ -6,7 +6,7 @@ function App(){
 
   const toggleLedOn = async () => {
     try {
-      const response = await fetch('http://192.168.178.74/led/on');
+      const response = await fetch('http://192.168.238.82/led/on');
       const result = await response.text();
       if (result === 'LED turned on' || result === 'LED turned on') {
         setIsLedOn(!isLedOn);
@@ -19,7 +19,7 @@ function App(){
   };
   const toggleLedOff = async () => {
     try {
-      const response = await fetch('http://192.168.178.74/led/off');
+      const response = await fetch('http://192.168.238.82/led/off');
       const result = await response.text();
       if (result === 'LED turned on' || result === 'LED turned off') {
         setIsLedOn(!isLedOn);
@@ -32,7 +32,7 @@ function App(){
   };
   const toggleBuzzerOn = async () => {
     try {
-      const response = await fetch('http://192.168.178.74/Buzzer/on');
+      const response = await fetch('http://192.168.238.82/Buzzer/on');
       const result = await response.text();
       if (result === 'Buzzer on' || result === 'Buzzer off') {
         // Handle error
@@ -43,7 +43,7 @@ function App(){
   };
   const toggleBuzzerOff = async () => {
     try {
-      const response = await fetch('http://192.168.178.74/Buzzer/off');
+      const response = await fetch('http://192.168.238.82/Buzzer/off');
       const result = await response.text();
       if (result === 'Buzzer on' || result === 'Buzzer off') {
         // Handle error
