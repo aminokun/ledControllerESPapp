@@ -1,66 +1,33 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+const TDS_VALUE_URL = 'http://192.168.178.75/tdsValue';
 
 function App(){
-  const [isLedOn, setIsLedOn] = useState(false);
+  const [tdsValue, setTdsValue] = useState(0);
 
-  const toggleLedOn = async () => {
-    try {
-      const response = await fetch('http://192.168.178.74/led/on');
-      const result = await response.text();
-      if (result === 'LED turned on' || result === 'LED turned on') {
-        setIsLedOn(!isLedOn);
-      } else {
-        // Handle error
+  useEffect(() => {
+    const fetchTdsValue = async () => {
+      try {
+        const response = await fetch(TDS_VALUE_URL);
+        const tdsValue = await response.text();
+        setTdsValue(tdsValue);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      // Handle error
-    }
-  };
-  const toggleLedOff = async () => {
-    try {
-      const response = await fetch('http://192.168.178.74/led/off');
-      const result = await response.text();
-      if (result === 'LED turned on' || result === 'LED turned off') {
-        setIsLedOn(!isLedOn);
-      } else {
-        // Handle error
-      }
-    } catch (error) {
-      // Handle error
-    }
-  };
-  const toggleBuzzerOn = async () => {
-    try {
-      const response = await fetch('http://192.168.178.74/Buzzer/on');
-      const result = await response.text();
-      if (result === 'Buzzer on' || result === 'Buzzer off') {
-        // Handle error
-      }
-    } catch (error) {
-      // Handle error
-    }
-  };
-  const toggleBuzzerOff = async () => {
-    try {
-      const response = await fetch('http://192.168.178.74/Buzzer/off');
-      const result = await response.text();
-      if (result === 'Buzzer on' || result === 'Buzzer off') {
-        // Handle error
-      }
-    } catch (error) {
-      // Handle error
-    }
-  };
+    };
+
+    fetchTdsValue();
+  }, []);
   
   return (
     <View style={styles.container}> 
       <Text style={styles.title}>
-        Eind Challenge
+        TDS Value: {tdsValue}
       </Text>
 
 
-        <View style={styles.buttonsLed}>
+        {/* <View style={styles.buttonsLed}>
           <TouchableOpacity style={styles.button} title="Toggle LED on" onPress={toggleLedOn} >
               <Text style={styles.buttonText}>
                 ON
@@ -84,7 +51,7 @@ function App(){
                 buzzer off
               </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       
     </View>
   );
